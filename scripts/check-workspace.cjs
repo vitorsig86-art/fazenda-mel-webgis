@@ -95,6 +95,12 @@ const mdsLegendMarkup = renderToStaticMarkup(Legend({ ...mdsLegend, visibility: 
 assert.match(mdsLegendMarkup, /src="\/mds_legend\.png"/);
 assert.match(mdsLegendMarkup, /alt="Legenda do Modelo Digital da Superfície"/);
 assert.doesNotMatch(mdsLegendMarkup, /raster-legend-gradient/);
+const aspectLegend = project.layers.find((layer) => layer.kind === "solar-orientation").legend;
+assert.equal(Legend({ ...aspectLegend, visibility: false }), null);
+const aspectLegendMarkup = renderToStaticMarkup(Legend({ ...aspectLegend, visibility: true }));
+assert.match(aspectLegendMarkup, /src="\/aspect_legend\.png"/);
+assert.match(aspectLegendMarkup, /alt="Legenda de Orientação solar"/);
+assert.doesNotMatch(aspectLegendMarkup, /raster-legend-gradient/);
 assert.match(renderToStaticMarkup(Legend({ ...mdtLegend, imageUrl: "/future-legend.png", visibility: true })), /src="\/future-legend\.png"/);
 const gradientLegend = { title: "Gradient", min: 0, max: 10, tickValues: [0, 10], gradientStops: [{ position: 0, color: "blue" }, { position: 100, color: "red" }], visibility: true };
 assert.match(renderToStaticMarkup(Legend(gradientLegend)), /raster-legend-gradient/);

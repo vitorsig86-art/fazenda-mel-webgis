@@ -22,8 +22,8 @@ assert.equal(project, fazendaMelModule.fazendaMelProject);
 assert.equal(new Set(projects.map((entry) => entry.id)).size, projects.length);
 assert.equal(new Set(project.layers.map((layer) => layer.id)).size, project.layers.length);
 assert.equal(project.layers.filter((layer) => layer.defaultVisible).length, 3);
-assert.equal(project.layers.filter((layer) => layer.legend).length, 2);
-for (const [kind, imageUrl] of [["dtm", "/mdt_legend.png"], ["dsm", "/mds_legend.png"]]) {
+assert.equal(project.layers.filter((layer) => layer.legend).length, 3);
+for (const [kind, imageUrl] of [["dtm", "/mdt_legend.png"], ["dsm", "/mds_legend.png"], ["solar-orientation", "/aspect_legend.png"]]) {
   const legend = project.layers.find((layer) => layer.kind === kind).legend;
   assert.equal(legend.type, "image");
   assert.equal(legend.imageUrl, imageUrl);

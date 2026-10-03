@@ -132,6 +132,12 @@ export const fazendaMelProject: ProjectConfig = {
       allowMissingTiles: true,
     },
     defaultVisible: false,
+    legend: {
+      type: "image",
+      title: "Orientação solar",
+      imageUrl: "/aspect_legend.png",
+      imageAlt: "Legenda de Orientação solar",
+    },
   }, {
     id: "fazenda-mel-property-boundary",
     name: "Limite da propriedade",

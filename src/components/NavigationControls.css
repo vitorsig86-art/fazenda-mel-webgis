@@ -56,7 +56,9 @@
 .navigation-controls button:focus-visible { outline: 2px solid #fff; outline-offset: -4px; }
 
 @media (max-width: 760px) {
-  .navigation-controls { top: calc(var(--header-height) + 14px); right: max(14px, env(safe-area-inset-right)); }
-  /* The existing mobile service badge otherwise intersects the navigation stack. */
-  .app-shell:has(.navigation-controls) .ion-status { top: calc(var(--header-height) + 224px); }
+  .navigation-controls, .app-shell:has(.raster-legend-stack) .navigation-controls { top: calc(var(--header-height) + 8px); right: max(8px, env(safe-area-inset-right)); width: 44px; gap: 4px; }
+  .navigation-controls .navigation-compass { width: 44px; height: 44px; }
+  .navigation-compass-face { width: 42px; height: 42px; }
+  .navigation-button-stack button { font-size: 22px; }
+  .navigation-button-stack svg { width: 18px; height: 18px; }
 }

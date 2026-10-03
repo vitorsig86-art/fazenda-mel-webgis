@@ -78,4 +78,5 @@
 @media (max-width: 760px) {
   .raster-legend { --legend-bottom: 96px; right: max(12px, env(safe-area-inset-right)); }
   .raster-legend-stack { --legend-bottom: 96px; right: max(12px, env(safe-area-inset-right)); }
+  .raster-legend-stack { max-height: max(0px, calc(100dvh - var(--header-height) - var(--legend-bottom) - env(safe-area-inset-bottom) - 200px)); }
 }

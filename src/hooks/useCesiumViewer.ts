@@ -6,7 +6,6 @@ export function useCesiumViewer() {
   const containerRef = useRef<HTMLDivElement>(null);
   const [viewer, setViewer] = useState<Viewer | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [terrainStatus, setTerrainStatus] = useState<"loading" | "world" | "ellipsoid">("loading");
 
   useEffect(() => {
     if (!containerRef.current) return;
@@ -26,14 +25,12 @@ export function useCesiumViewer() {
     let removeTerrainReady = () => {};
     let removeTerrainError = () => {};
     let removeTileError = () => {};
-    setTerrainStatus("loading");
 
     function useEllipsoid() {
       if (!active || fellBack || instance.isDestroyed()) return;
       fellBack = true;
       // The scene setter also cancels any pending World Terrain ready listener.
       instance.scene.terrainProvider = new EllipsoidTerrainProvider();
-      setTerrainStatus("ellipsoid");
       instance.scene.requestRender();
       // Terrain errors may contain authenticated URLs. Never log the raw error.
       console.warn("Cesium World Terrain unavailable; using WGS84 Ellipsoid.");
@@ -53,7 +50,6 @@ export function useCesiumViewer() {
           tileError.retry = false;
           useEllipsoid();
         });
-        setTerrainStatus("world");
         instance.scene.requestRender();
       });
     } catch {
@@ -75,5 +71,5 @@ export function useCesiumViewer() {
     };
   }, []);
 
-  return { containerRef, viewer, error, terrainStatus };
+  return { containerRef, viewer, error };
 }

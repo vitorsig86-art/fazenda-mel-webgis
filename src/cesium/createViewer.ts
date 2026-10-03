@@ -1,7 +1,5 @@
 import { Ion, Viewer } from "cesium";
 
-export const hasIonToken = Boolean(import.meta.env.VITE_CESIUM_ION_TOKEN?.trim());
-
 export function createViewer(container: HTMLElement): Viewer {
   Ion.defaultAccessToken = import.meta.env.VITE_CESIUM_ION_TOKEN?.trim() ?? "";
 

@@ -33,17 +33,9 @@ VITE_CESIUM_ION_TOKEN=your_browser_safe_token
 
 Restart Vite after changing environment variables. Vite exposes `VITE_*` values to the browser: use a restricted, read-only ion token, never account secrets. **Bing Aerial** uses `createWorldImageryAsync({ style: IonWorldImageryStyle.AERIAL })` and the existing `Ion.defaultAccessToken` set by `createViewer`. No direct Bing API key is used. If ion/provider initialization or a Bing tile request fails, only the basemap is replaced with OpenStreetMap and the panel shows **Bing Aerial unavailable ? OpenStreetMap fallback**. On success it shows only **Bing Aerial**. The basemap is always inserted at index 0; Orthomosaic, MDS, and future imagery stay above it. Provider credits remain managed by Cesium. World Terrain is initialized independently from imagery; camera behavior is unchanged. Internet access and ion access to Bing Aerial imagery are required.
 
-## Temporary Cesium ion connection diagnostic
-
-On page load, `useIonConnectionTest` passes the existing `VITE_CESIUM_ION_TOKEN` to `IonResource.fromAssetId(1, { accessToken })`. Asset 1 is Cesium World Terrain. This makes one authenticated GET to `https://api.cesium.com/v1/assets/1/endpoint`. It does not fetch terrain metadata/tiles or assign a terrain provider to the viewer. A shared promise prevents duplicate requests during React StrictMode effect replays; reload for a fresh attempt.
-
-The status distinguishes token configured/testing, **Cesium ion: connected**, **Cesium ion: connection failed**, and token not configured (no request). Success verifies World Terrain asset access, rather than terrain rendering or access to other assets. Failures may reflect permissions, origin restrictions, or network/CORS problems. Console diagnostics include sanitized error name/message, HTTP status and response when available; the original error/resource and token are never logged.
-
-This check is temporary. To remove it, remove `useIonConnectionTest.ts` and its import/call/status mapping in `App.tsx`, then restore the configuration-only label. Terrain, imagery, camera, and layer loaders need no restoration.
-
 ## Terrain surface
 
-The existing viewer hook applies `viewer.scene.setTerrain(Terrain.fromWorldTerrain())` after `createViewer` configures the ion token. The status changes from loading to **Terrain: Cesium World Terrain** when its provider is ready. Initialization failures or terrain tile errors replace only the terrain provider with `EllipsoidTerrainProvider` and show **Terrain: WGS84 Ellipsoid**. Console warnings do not include raw errors, URLs, or credentials. Bing Aerial, Orthomosaic, MDS, and MDT remain independent imagery layers draped over the active globe surface, with their existing order and configuration. No custom terrain or 3D content is enabled.
+The existing viewer hook applies `viewer.scene.setTerrain(Terrain.fromWorldTerrain())` after `createViewer` configures the ion token. Initialization failures or terrain tile errors replace only the terrain provider with `EllipsoidTerrainProvider`. Console warnings do not include raw errors, URLs, or credentials. Bing Aerial, Orthomosaic, MDS, and MDT remain independent imagery layers draped over the active globe surface, with their existing order and configuration. No custom terrain or 3D content is enabled.
 
 ## Fazenda Mel datasets
 

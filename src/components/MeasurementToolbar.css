@@ -21,16 +21,16 @@
 .measurement-message:empty { display: none; }
 .measurement-actions { display: flex; gap: 8px; margin-top: 10px; }
 .measurement-actions button { flex: 1; padding: 7px; border: 1px solid #8fa2b54d; border-radius: 4px; background: #354756; color: #fff; font-size: 11px; }
-/* On smaller viewports use the left map edge below the project title, keeping
-   navigation, mobile status and the existing right legend column untouched. */
+/* On smaller viewports use the left map edge, keeping navigation and the
+   existing right legend column clear. */
 @media (max-width: 1100px) {
   .measurement-controls, .app-shell:has(.raster-legend-stack) .measurement-controls { top: calc(var(--header-height) + 114px); right: auto; left: calc(var(--panel-width) + 14px); width: min(220px, calc(100vw - var(--panel-width) - 180px)); }
 }
 @media (max-width: 760px) {
-  .measurement-controls, .app-shell:has(.raster-legend-stack) .measurement-controls { left: 14px; width: min(160px, calc(100vw - 84px)); }
-  .app-shell:has(.raster-legend-stack) .measurement-controls { width: min(160px, calc(100vw - 200px)); }
-  .measurement-readout { max-height: max(80px, calc(100dvh - var(--header-height) - 300px)); }
-  .measurement-toolbar button { min-height: 44px; }
-  .app-shell:has(.measurement-controls) .ion-status { max-width: calc(100vw - 200px); }
-  .app-shell:has(.measurement-controls) .map-service-status { min-width: 0; overflow-wrap: anywhere; }
+  .measurement-controls, .app-shell:has(.raster-legend-stack) .measurement-controls { top: calc(var(--header-height) + 8px); left: max(8px, env(safe-area-inset-left)); right: auto; width: 202px; }
+  .measurement-toolbar button { height: 44px; min-height: 44px; }
+  .measurement-toolbar svg { width: 18px; height: 18px; }
+  .measurement-readout { margin-top: 6px; padding: 10px; font-size: 11px; max-height: max(44px, calc(100dvh - var(--header-height) - 160px - env(safe-area-inset-bottom))); }
+  .measurement-actions { gap: 6px; }
+  .measurement-actions button { min-height: 44px; padding: 6px; }
 }

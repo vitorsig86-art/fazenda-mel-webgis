@@ -69,6 +69,12 @@ export const fazendaMelProject: ProjectConfig = {
       allowMissingTiles: true,
     },
     defaultVisible: false,
+    legend: {
+      type: "image",
+      title: "MDS",
+      imageUrl: "/mds_legend.png",
+      imageAlt: "Legenda do Modelo Digital da Superfície",
+    },
   }, {
     id: "fazenda-mel-mdt",
     name: "Modelo Digital do Terreno",

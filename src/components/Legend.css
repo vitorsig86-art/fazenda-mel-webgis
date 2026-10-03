@@ -77,6 +77,11 @@
   flex-shrink: 0;
 }
 
+/* A taller stack must stay below the existing desktop navigation column. */
+@media (min-width: 761px) {
+  .raster-legend-stack:has(.raster-legend:nth-child(2)) { max-height: max(0px, calc(100dvh - var(--header-height) - var(--legend-bottom) - env(safe-area-inset-bottom) - 224px)); }
+}
+
 /* Mobile legends expand in place while keeping controls and credits clear. */
 @media (max-width: 760px) {
   .raster-legend { --legend-bottom: 48px; --mobile-legend-width: min(25vw, 92px); width: var(--mobile-legend-width); right: max(12px, env(safe-area-inset-right)); pointer-events: auto; cursor: zoom-in; touch-action: manipulation; transition: width 180ms ease; }

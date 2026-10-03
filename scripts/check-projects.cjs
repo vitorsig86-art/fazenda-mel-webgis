@@ -134,7 +134,7 @@ async function main() {
     const source = configured.source;
     if (source.format === "ion-world-imagery") {
       assert.ok(loaded instanceof ImageryLayer);
-      assert.equal(imageryStyle, cesium.IonWorldImageryStyle.AERIAL);
+      assert.equal(imageryStyle, cesium.IonWorldImageryStyle.AERIAL_WITH_LABELS);
       failImagery = true;
       const fallback = await loader.loadLayer(configured);
       failImagery = false;

@@ -63,7 +63,7 @@ export async function loadLayer(layer: ProjectLayerConfig): Promise<LoadedLayer>
     case "ion-world-imagery": {
       try {
         // Uses Ion.defaultAccessToken, set from VITE_CESIUM_ION_TOKEN by createViewer.
-        const provider = await createWorldImageryAsync({ style: IonWorldImageryStyle.AERIAL });
+        const provider = await createWorldImageryAsync({ style: IonWorldImageryStyle.AERIAL_WITH_LABELS });
         return new ImageryLayer(provider);
       } catch {
         // Never log credential-bearing provider errors or metadata URLs.

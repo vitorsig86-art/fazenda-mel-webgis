@@ -31,7 +31,7 @@ Set the existing browser-safe ion token in `.env.local`:
 VITE_CESIUM_ION_TOKEN=your_browser_safe_token
 ```
 
-Restart Vite after changing environment variables. Vite exposes `VITE_*` values to the browser: use a restricted, read-only ion token, never account secrets. **Bing Aerial** uses `createWorldImageryAsync({ style: IonWorldImageryStyle.AERIAL })` and the existing `Ion.defaultAccessToken` set by `createViewer`. No direct Bing API key is used. If ion/provider initialization or a Bing tile request fails, only the basemap is replaced with OpenStreetMap and the panel shows **Bing Aerial unavailable ? OpenStreetMap fallback**. On success it shows only **Bing Aerial**. The basemap is always inserted at index 0; Orthomosaic, MDS, and future imagery stay above it. Provider credits remain managed by Cesium. World Terrain is initialized independently from imagery; camera behavior is unchanged. Internet access and ion access to Bing Aerial imagery are required.
+Restart Vite after changing environment variables. Vite exposes `VITE_*` values to the browser: use a restricted, read-only ion token, never account secrets. **Bing Aerial com rótulos** uses `createWorldImageryAsync({ style: IonWorldImageryStyle.AERIAL_WITH_LABELS })` and the existing `Ion.defaultAccessToken` set by `createViewer`. No direct Bing API key is used. If ion/provider initialization or a Bing tile request fails, only the basemap is replaced with OpenStreetMap and the panel shows **Bing Aerial unavailable ? OpenStreetMap fallback**. On success it shows only **Bing Aerial com rótulos**. The basemap is always inserted at index 0; Orthomosaic, MDS, and future imagery stay above it. Provider credits remain managed by Cesium. World Terrain is initialized independently from imagery; camera behavior is unchanged. Internet access and ion access to Bing Aerial with Labels imagery are required.
 
 ## Terrain surface
 
@@ -77,7 +77,7 @@ Disabling it sets show to false; re-enabling reuses the same tileset while the p
 
 ## Manual verification
 
-1. Confirm Fazenda Mel opens with **Bing Aerial** via ion, **Ortomosaico** and **Limite da propriedade**, with no console errors.
+1. Confirm Fazenda Mel opens with **Bing Aerial com rótulos** via ion, **Ortomosaico** and **Limite da propriedade**, with no console errors.
 2. Toggle each layer and check visibility changes.
 3. Zoom into Fazenda Mel; verify PNG requests use levels 11-20 and TMS row addresses.
 4. Use **Home** and confirm the configured opening view; pan, zoom, tilt, reset north, and draw/clear measurements.

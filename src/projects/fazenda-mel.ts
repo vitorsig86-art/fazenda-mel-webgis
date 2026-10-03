@@ -2,8 +2,8 @@ import type { GeographicBounds, ProjectConfig, ProjectLayerConfig } from "./type
 
 const basemap: ProjectLayerConfig = {
   id: "basemap",
-  name: "Bing Aerial",
-  description: "Bing Maps Aerial via Cesium ion",
+  name: "Bing Aerial com rótulos",
+  description: "Bing Maps Aerial with Labels via Cesium ion",
   kind: "basemap",
   source: {
     format: "ion-world-imagery",

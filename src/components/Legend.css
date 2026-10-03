@@ -77,17 +77,24 @@
   flex-shrink: 0;
 }
 
-/* Leave room for Cesium credits on narrow screens; never enlarge the scale. */
+/* Mobile legends expand in place while keeping controls and credits clear. */
 @media (max-width: 760px) {
-  .raster-legend { --legend-bottom: 96px; right: max(12px, env(safe-area-inset-right)); }
-  .raster-legend-stack { --legend-bottom: 96px; right: max(12px, env(safe-area-inset-right)); }
+  .raster-legend { --legend-bottom: 48px; --mobile-legend-width: min(30vw, 110px); width: var(--mobile-legend-width); right: max(12px, env(safe-area-inset-right)); pointer-events: auto; cursor: zoom-in; touch-action: manipulation; transition: width 180ms ease; }
+  .raster-legend-stack { --legend-bottom: 48px; right: max(12px, env(safe-area-inset-right)); align-items: flex-end; }
   .raster-legend-stack { max-height: max(0px, calc(100dvh - var(--header-height) - var(--legend-bottom) - env(safe-area-inset-bottom) - 200px)); }
-  .raster-legend.raster-legend-image { width: 32vw; max-width: 104px; }
-  .raster-legend-image img { width: 100%; height: auto; }
-  .raster-legend-stack:has(.raster-legend-image) { --legend-bottom: 64px; right: max(14px, env(safe-area-inset-right)); }
-  .app-shell:has(.layer-panel.is-open) .raster-legend-image { visibility: hidden; }
+  .raster-legend.raster-legend-image { width: var(--mobile-legend-width); max-width: none; }
+  .raster-legend-image img { width: 100%; max-height: max(0px, calc(100dvh - var(--header-height) - var(--legend-bottom) - env(safe-area-inset-bottom) - 200px)); height: auto; object-fit: contain; object-position: right bottom; }
+  .raster-legend.is-expanded { --mobile-legend-width: min(48vw, 172px); cursor: zoom-out; }
+  .raster-legend.is-expanded .raster-legend-title { font-size: 15px; }
+  .raster-legend.is-expanded .raster-legend-tick { font-size: 12px; }
+  .raster-legend:focus-visible { outline: 2px solid #7fa846; outline-offset: -2px; }
+  .app-shell:has(.layer-panel.is-open) .raster-legend { visibility: hidden; }
 }
 
 @media (max-width: 375px) {
-  .raster-legend.raster-legend-image { width: 28vw; max-width: 96px; }
+  .raster-legend:not(.is-expanded) { --mobile-legend-width: min(29vw, 104px); }
+}
+
+@media (max-width: 760px) and (prefers-reduced-motion: reduce) {
+  .raster-legend { transition: none; }
 }

@@ -82,4 +82,12 @@
   .raster-legend { --legend-bottom: 96px; right: max(12px, env(safe-area-inset-right)); }
   .raster-legend-stack { --legend-bottom: 96px; right: max(12px, env(safe-area-inset-right)); }
   .raster-legend-stack { max-height: max(0px, calc(100dvh - var(--header-height) - var(--legend-bottom) - env(safe-area-inset-bottom) - 200px)); }
+  .raster-legend.raster-legend-image { width: 32vw; max-width: 104px; }
+  .raster-legend-image img { width: 100%; height: auto; }
+  .raster-legend-stack:has(.raster-legend-image) { --legend-bottom: 64px; right: max(14px, env(safe-area-inset-right)); }
+  .app-shell:has(.layer-panel.is-open) .raster-legend-image { visibility: hidden; }
+}
+
+@media (max-width: 375px) {
+  .raster-legend.raster-legend-image { width: 28vw; max-width: 96px; }
 }

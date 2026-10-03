@@ -1,0 +1,81 @@
+.raster-legend {
+  --legend-bottom: 48px;
+  --legend-bar-height: clamp(64px, calc(100dvh - var(--header-height) - var(--legend-bottom) - 120px), 205px);
+  position: absolute;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: calc(var(--legend-bottom) + env(safe-area-inset-bottom));
+  width: 95px;
+  height: calc(var(--legend-bar-height) + 45px);
+  padding: 8px;
+  background: #000;
+  color: #fff;
+  font-family: Arial, sans-serif;
+  pointer-events: none;
+}
+
+.raster-legend-title {
+  margin: 0 0 13px;
+  height: 16px;
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: 600;
+  text-align: center;
+}
+
+.raster-legend-scale {
+  position: relative;
+  height: var(--legend-bar-height);
+}
+
+.raster-legend-gradient {
+  width: 32px;
+  height: 100%;
+}
+
+.raster-legend-tick {
+  position: absolute;
+  left: 32px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  transform: translateY(-50%);
+  font-size: 10px;
+  line-height: 12px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+
+.raster-legend-mark {
+  width: 5px;
+  height: 1px;
+  background: #fff;
+  flex-shrink: 0;
+}
+
+.raster-legend-stack {
+  --legend-bottom: 48px;
+  position: absolute;
+  right: max(16px, env(safe-area-inset-right));
+  bottom: calc(var(--legend-bottom) + env(safe-area-inset-bottom));
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-height: calc(100dvh - var(--header-height) - var(--legend-bottom) - env(safe-area-inset-bottom) - 24px);
+  overflow-y: auto;
+  scrollbar-width: none;
+}
+
+.raster-legend-stack::-webkit-scrollbar { display: none; }
+
+.raster-legend-stack .raster-legend {
+  position: relative;
+  right: auto;
+  bottom: auto;
+  flex-shrink: 0;
+}
+
+/* Leave room for Cesium credits on narrow screens; never enlarge the scale. */
+@media (max-width: 760px) {
+  .raster-legend { --legend-bottom: 96px; right: max(12px, env(safe-area-inset-right)); }
+  .raster-legend-stack { --legend-bottom: 96px; right: max(12px, env(safe-area-inset-right)); }
+}

@@ -79,7 +79,17 @@ export interface ProjectConfig {
 
 export type LayerStatus = "idle" | "loading" | "ready" | "fallback" | "error";
 
-export interface LegendConfig {
+export type LegendConfig = GradientLegendConfig | ImageLegendConfig;
+
+export interface ImageLegendConfig {
+  type: "image";
+  title: string;
+  imageUrl: string;
+  imageAlt: string;
+}
+
+export interface GradientLegendConfig {
+  type?: "gradient";
   title: string;
   min: number;
   max: number;

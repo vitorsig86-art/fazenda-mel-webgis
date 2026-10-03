@@ -34,7 +34,7 @@ export const fazendaMelProject: ProjectConfig = {
   },
   // Keep a global base layer beneath the bounded orthomosaic so regional
   // imagery is not treated as a base layer and stretched across the globe.
-  // Legends are pending Fazenda Mel values; omit them for now.
+  // Each raster can provide an image or gradient legend independently.
   layers: [basemap, {
     id: "fazenda-mel-orthomosaic",
     name: "Ortomosaico",
@@ -86,6 +86,12 @@ export const fazendaMelProject: ProjectConfig = {
       allowMissingTiles: true,
     },
     defaultVisible: false,
+    legend: {
+      type: "image",
+      title: "MDT",
+      imageUrl: "/mdt_legend.png",
+      imageAlt: "Legenda do Modelo Digital do Terreno: elevação de 893,4 a 944,7 metros",
+    },
   }, {
     id: "fazenda-mel-slope",
     name: "Declividade",

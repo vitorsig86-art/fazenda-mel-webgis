@@ -51,14 +51,14 @@ All five rasters use TMS `{z}/{x}/{reverseY}.png`, EPSG:3857 (`WebMercatorTiling
 
 Vectors use `/vetores/peri_imovel.geojson` (red, 3 px, transparent fill, enabled), `/vetores/curvas_nivel.geojson` (uniform black, 1 px, disabled, no major contours or labels), and `/vetores/linhas_drenagem.geojson` (blue, 2 px, disabled). All are clamped to ground and do not move the camera when loaded.
 
-The final opening and animated Home scene share the single `initialCamera` configuration in `src/projects/fazenda-mel.ts`. Startup uses `camera.setView()`; Home uses `camera.flyTo()` with a 1.2-second animation to the same destination and orientation. The shared `createCameraView()` helper creates the destination with `Cartesian3.fromDegrees()` and converts heading, pitch and roll from degrees to radians. Height is meters above the ellipsoid. MDT, MDS, slope and solar legends are omitted until Fazenda Mel values are supplied; the generic legend system remains available.
+The final opening and animated Home scene share the single `initialCamera` configuration in `src/projects/fazenda-mel.ts`. Startup uses `camera.setView()`; Home uses `camera.flyTo()` with a 1.2-second animation to the same destination and orientation. The shared `createCameraView()` helper creates the destination with `Cartesian3.fromDegrees()` and converts heading, pitch and roll from degrees to radians. Height is meters above the ellipsoid. MDT displays the existing `/mdt_legend.png` image only while enabled. Other raster legends remain omitted until supplied. Future layers can configure `legend: { type: "image", title, imageUrl, imageAlt }` to use their own assets; numeric gradient legends remain supported.
 
 For tile diagnostics, inspect the browser Network panel for PNG URLs, HTTP status and CORS errors. Public R2 assets must permit the app origin. TMS rows use `2^z - 1 - y`. Cesium can attempt ancestor tiles below the configured minimum after loading failures; the global basemap has independent zoom levels.
 
 ## Structure
 
 - `src/projects/types.ts`: `ProjectConfig`, `CameraConfig`, `ProjectLayerConfig`, source and legend models; thematic type is independent of transport format.
-- `src/projects/fazenda-mel.ts`: Fazenda Mel metadata, initial/Home camera, bounds, all layer URLs/styles/zoom levels/default visibility and pending legend configuration.
+- `src/projects/fazenda-mel.ts`: Fazenda Mel metadata, initial/Home camera, bounds, all layer URLs/styles/zoom levels/default visibility and legend configuration.
 - `src/projects/index.ts`: single Fazenda Mel entry used at startup.
 - `src/cesium/`: viewer configuration and layer loading/attachment/removal.
 - `src/hooks/`: React lifecycle, async cleanup, visibility, error state.

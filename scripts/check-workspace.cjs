@@ -82,4 +82,15 @@ for (const layer of [...sections[0].layers, ...sections[2].layers, ...sections[3
   assert.ok(!elements(row).some(({ node }) => node.type === "input" && node.props.type === "range"));
 }
 assert.match(renderToStaticMarkup(render()), /model-layer-card/);
-console.log("Workspace passed: Portuguese sections, static project header, no selector, all checkbox callbacks, five independent sliders and distinct 3D card.");
+const { Legend } = load("src/components/Legend.tsx");
+const mdtLegend = project.layers.find((layer) => layer.kind === "dtm").legend;
+assert.equal(Legend({ ...mdtLegend, visibility: false }), null);
+const legendMarkup = renderToStaticMarkup(Legend({ ...mdtLegend, visibility: true }));
+assert.match(legendMarkup, /src="\/mdt_legend\.png"/);
+assert.match(legendMarkup, /alt="Legenda do Modelo Digital do Terreno/);
+assert.doesNotMatch(legendMarkup, /raster-legend-gradient/);
+assert.match(renderToStaticMarkup(Legend({ ...mdtLegend, imageUrl: "/future-legend.png", visibility: true })), /src="\/future-legend\.png"/);
+const gradientLegend = { title: "Gradient", min: 0, max: 10, tickValues: [0, 10], gradientStops: [{ position: 0, color: "blue" }, { position: 100, color: "red" }], visibility: true };
+assert.match(renderToStaticMarkup(Legend(gradientLegend)), /raster-legend-gradient/);
+assert.equal(Legend({ ...gradientLegend, max: 0 }), null);
+console.log("Workspace passed: Portuguese sections, checkbox callbacks, independent sliders, 3D card, reusable image legends, hidden legends and gradient compatibility.");

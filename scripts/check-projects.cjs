@@ -22,7 +22,8 @@ assert.equal(project, fazendaMelModule.fazendaMelProject);
 assert.equal(new Set(projects.map((entry) => entry.id)).size, projects.length);
 assert.equal(new Set(project.layers.map((layer) => layer.id)).size, project.layers.length);
 assert.equal(project.layers.filter((layer) => layer.defaultVisible).length, 3);
-assert.equal(project.layers.filter((layer) => layer.legend).length, 0);
+assert.equal(project.layers.filter((layer) => layer.legend).length, 1);
+assert.equal(project.layers.find((layer) => layer.legend).kind, "dtm");
 assert.equal(projects.length, 1);
 assert.equal(project.id, "fazenda-mel");
 assert.equal(project.name, "Fazenda Mel");
@@ -185,6 +186,12 @@ async function main() {
     } else assert.fail(`Unsupported source: ${source.format}`);
   }
   for (const layer of project.layers.filter((layer) => layer.legend)) {
+    if (layer.legend.type === "image") {
+      assert.equal(layer.legend.imageUrl, "/mdt_legend.png");
+      assert.ok(layer.legend.imageAlt);
+      assert.ok(fs.existsSync(path.join(root, "public", layer.legend.imageUrl)));
+      continue;
+    }
     assert.ok(layer.legend.max > layer.legend.min);
     assert.ok(layer.legend.tickValues.every((value) => value >= layer.legend.min && value <= layer.legend.max));
     assert.equal(layer.legend.gradientStops[0].position, 0);

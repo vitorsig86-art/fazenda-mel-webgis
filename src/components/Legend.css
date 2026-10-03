@@ -22,6 +22,9 @@
   text-align: center;
 }
 
+.raster-legend.raster-legend-image { width: auto; max-width: 132px; height: auto; padding: 0; background: transparent; }
+.raster-legend-image img { display: block; max-width: 100%; height: auto; }
+
 .raster-legend-scale {
   position: relative;
   height: var(--legend-bar-height);

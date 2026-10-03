@@ -1,13 +1,23 @@
 import type { LegendConfig } from "../projects/types";
 import "./Legend.css";
 
-interface LegendProps extends LegendConfig {
+type LegendProps = LegendConfig & {
   visibility: boolean;
   formatValue?: (value: number) => string;
-}
+};
 
-export function Legend({ title, min, max, tickValues, gradientStops, visibility, decimalPlaces, formatValue = (value) => decimalPlaces === undefined ? String(value) : value.toFixed(decimalPlaces) }: LegendProps) {
-  if (!visibility || max <= min) return null;
+export function Legend(props: LegendProps) {
+  if (!props.visibility) return null;
+  if (props.type === "image") {
+    return (
+      <section className="raster-legend raster-legend-image" aria-label={`${props.title} legend`}>
+        <img src={props.imageUrl} alt={props.imageAlt} />
+      </section>
+    );
+  }
+
+  const { title, min, max, tickValues, gradientStops, decimalPlaces, formatValue = (value) => decimalPlaces === undefined ? String(value) : value.toFixed(decimalPlaces) } = props;
+  if (max <= min) return null;
 
   const gradient = [...gradientStops]
     .sort((a, b) => a.position - b.position)
